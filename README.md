@@ -8,7 +8,7 @@ Import the package in your Jupyter project or Python script:
 `import extrudion as ex`
 
 
-##Available commands:
+# Available commands:
 **Analyze a whole directory**
 `ex.analyzeDirectory(folder_path, cut_off = True, sample_thickness = 10)` 
 plots all the `.TRA` files in the given directory. 
@@ -28,11 +28,11 @@ Arguments:
 **Analyze a single file**
 `ex.analyzeFile(*file_path*, folder=[], cut_off = True, sample_thickeness = 10)`
 
-AnalyzeFile, analyzes a single file and returns the pandas.Dataframe with the results as shown below. 
+`analyzeFile`, analyzes a single file and returns the pandas.Dataframe with the results as shown below. 
 -`folder` must be specified as a second argument
 -`cut_off` and `sample_thickness` can be specified as a third argument as shown above.
 
-#Mathematical Formulas
+# Mathematical Formulas
 
 `Stress` = Force['N'] / `sample_thickness` / 10 * 10^3 
 
