@@ -53,8 +53,9 @@ class File:
         return pd.DataFrame({'strain': strain, 'stress': stress})
         
     def getStress(self, data) -> pd.Series:
-        # Divide force by surface in mm to get Pascals
-        return data['N'] / (10 * self.sample_thickness) * 1_000_000
+        # Divide force by surface in mm to get Pascals, divide by 1000 to get KPascals
+        return data['N'] / (10 * self.sample_thickness) * 1_000_000 / 1000
+
     
     def getStrain(self, data) -> pd.Series:
         import numpy as np

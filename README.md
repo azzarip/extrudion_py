@@ -1,4 +1,4 @@
-Python Package to 
+Python Package to extract information about the Stress, Strain and Young Modulus from a set of `.TRA` files
 
 #Instruction
 Run the following command in the conda/miniconda terminal to install the package:
@@ -10,17 +10,38 @@ Import the package in your Jupyter project or Python script:
 
 ##Available commands:
 **Analyze a whole directory**
-`ex.analyzeDirectory(folder_path)`
+`ex.analyzeDirectory(folder_path, cut_off = True, sample_thickness = 10)` 
+plots all the `.TRA` files in the given directory. 
 
+
+returns a pandas DataFrame containing 
+
+Arguments:
 - `folder_path` can be left empty to analyze the current working directory (e.g. `ex.analyzeDirectory()` )
 - `folder_path` can be a relative path to a folder within the current working directory (e.g. `ex.analyzeDirectory('data')` )
 - `folder_path` can be the absolute path (e.g. `ex.analyzeDirectory('C:\Users\Desktop\extrusion_data')` )
 
+- `cut_off` is by default `True` and must not be specified. If it is true, cuts the data at the max value of Stress
+- `sample_thickeness` is the value in `mm` of the size of the sample. The surface of the sample is `sample_thickeness * 10` converted in meters squared. If not specified, a value of 10 mm is assumed.
+
+
 **Analyze a single file**
-`ex.analyzeDirectory(*file_path*)`
+`ex.analyzeFile(*file_path*, folder=[], cut_off = True, sample_thickeness = 10)`
+
+AnalyzeFile, analyzes a single file and returns the pandas.Dataframe with the results as shown below. 
+-`folder` must be specified as a second argument
+-`cut_off` and `sample_thickness` can be specified as a third argument as shown above.
 
 #Mathematical Formulas
 
-#Input data
+`Stress` = Force['N'] / `sample_thickness` / 10 * 10^3 
 
-The 
+returns gives the `stress` in `kPa`
+
+`Strain` = ln( length['mm'] / initial length ['mm']
+
+`Young Modulus` = slope of the best line fit for the curve
+
+`Intercept` = the incercet of the previous fit
+
+`Yield Stress and Strain` are the point of intersection for the Young modulus line shifted by 0.02 in the Strain and the data.
