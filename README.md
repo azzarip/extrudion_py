@@ -24,6 +24,7 @@ Arguments:
 - `cut_off` is by default `True` and must not be specified. If it is true, cuts the data at the max value of Stress
 - `sample_thickeness` is the value in `mm` of the size of the sample. The surface of the sample is `sample_thickeness * 10` converted in meters squared. If not specified, a value of 10 mm is assumed.
 
+The results are saved in `analysis.csv` file in the same directory.
 
 **Analyze a single file**
 `ex.analyzeFile(*file_path*, folder=[], cut_off = True, sample_thickeness = 10)`
