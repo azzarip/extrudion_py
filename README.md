@@ -46,3 +46,5 @@ returns gives the `stress` in `kPa`
 `Intercept` = the incercet of the previous fit
 
 `Yield Stress and Strain` are the point of intersection for the Young modulus line shifted by 0.02 in the Strain and the data.
+# Example
+![image](https://github.com/azzarip/extrudion/assets/116155557/f4cefd4a-50b2-45b2-a603-f0fc15f6e8cc)
