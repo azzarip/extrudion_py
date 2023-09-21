@@ -165,3 +165,7 @@ cython_debug/
 #TRA Files
 data/
 *.TRA
+
+# Poetry
+poetry.lock
+pyproject.toml

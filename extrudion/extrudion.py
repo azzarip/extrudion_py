@@ -1,3 +1,7 @@
+# Copyright 2023 Paride Azzari
+#
+# Licensed under the MIT License. See LICENSE
+
 import pandas as pd
 
 def analyzeDirectory(folder_path: str = '.', cut_off = True, sample_thickness = 10, save='') -> pd.DataFrame:
