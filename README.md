@@ -1,6 +1,7 @@
 Python Package to extract information about the Stress, Strain and Young Modulus from a set of `.TRA` files
 
-#Instruction
+# Set up Instructions
+
 Run the following command in the conda/miniconda terminal to install the package:
 `pip install extrudion` 
 
