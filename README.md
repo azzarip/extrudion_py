@@ -38,7 +38,7 @@ Arguments:
 
 returns gives the `stress` in `kPa`
 
-`Strain` = ln( length['mm'] / initial length ['mm']
+`Strain` = ln( length['mm'] / initial length ['mm'] )
 
 `Young Modulus` = slope of the best line fit for the curve
 
