@@ -1,6 +1,6 @@
 class Stress:
     import pandas as pd
-    from src.files import File
+    from .files import File
     
     def __init__(self, file: File, cut_off: bool = True, fit_window: int = 500):
         
@@ -40,14 +40,13 @@ class Stress:
     
     def getBestFit(self):
         import pandas as pd
-        from sklearn.linear_model import LinearRegression
+        import numpy as np
         
         step = 10
         left = 0
         right = self.fit_window
     
         fit_results = pd.DataFrame()
-        model = LinearRegression()
         sizeData = len(self.data)
 
         while True:
@@ -56,9 +55,8 @@ class Stress:
 
             data = self.data[left:right]
 
-            model.fit(data[['strain']], data[['stress']])
-            slope = model.coef_[0]
-            intercept = model.intercept_
+            slope, intercept = np.polyfit(data[['strain']], data[['stress']], 1)
+
             y_exp = slope * data['strain'] + intercept
             error = (data['stress'] - y_exp)**2
 

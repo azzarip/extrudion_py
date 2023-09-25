@@ -5,7 +5,6 @@ class Folder:
     @staticmethod
     def getList(folder_path: str) -> str:
         import os
-        import sys    
             
         try:
             dir_list = os.listdir(folder_path)
