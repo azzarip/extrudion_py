@@ -60,7 +60,7 @@ class Stress:
             y_exp = slope * data['strain'] + intercept
             error = (data['stress'] - y_exp)**2
 
-            fit_results = pd.concat([fit_results, pd.DataFrame({'strain': data.iloc[100].strain, 'slope': slope, 'intercept': intercept, 'error': error.sum()})],axis=0)
+            fit_results = pd.concat([fit_results, pd.DataFrame({'strain':  data[['strain']].iloc[int(self.fit_window / 2)].values, 'slope': slope, 'intercept': intercept, 'error': error.sum()})],axis=0)
 
             left += step
             right += step
@@ -100,7 +100,11 @@ class Stress:
         self.plotYield()
         
         plt.legend(['Data', 'Young Modulus', 'Shift', 'Max Stress', 'Yield'])
-        plt.show()
+        
+        plt.savefig('plots/'+self.file.filename + '.png')
+        plt.draw()
+        plt.pause(0.5)
+        plt.close()
         
         
     def plotMaxStress(self):

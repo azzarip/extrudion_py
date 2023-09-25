@@ -10,21 +10,27 @@ def analyzeDirectory(folder_path: str = '.', cut_off = True, sample_thickness = 
     Leaving returns the Current Working Directory.
     '''
     from .files import Folder
+    import os
     
     results = pd.DataFrame()
     
     try:
         files = Folder.getList(folder_path)
        
+        if not os.path.exists('plots'):
+            os.makedirs('plots')
+        
         for file in files:
             result = analyzeFile(file, folder_path, cut_off, sample_thickness)
             results = pd.concat([results, result])
             
-        results.rename_axis(index='file')
+        results = results.rename_axis(index='File')
         results.to_csv(folder_path+'/analysis.csv')
         return results
-    except Exception as e:
-        print(e)
+    
+    except FileNotFoundError as e:
+        print("File not found error:", e)
+
     
         
     
@@ -37,7 +43,6 @@ def analyzeFile(filename:str, folder: str, cut_off: bool = True, sample_thicknes
     file = File(filename, folder, sample_thickness)
     
     analysis = Stress(file, cut_off)
-    
     analysis.plot()
     
     results = analysis.results
