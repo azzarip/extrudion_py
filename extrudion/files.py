@@ -29,10 +29,10 @@ class Folder:
 class File:
     import pandas as pd
     
-    def __init__(self, filename: str, folder: str, sample_thickness = 10):
+    def __init__(self, filename: str, folder: str, sample_area = 100):
         self.filename = filename
         self.folder = folder
-        self.sample_thickness = sample_thickness
+        self.sample_area = sample_area
         self.data = self.calculate()
                 
     def openFile(self) -> pd.DataFrame:
@@ -53,7 +53,7 @@ class File:
         
     def getStress(self, data) -> pd.Series:
         # Divide force by surface in mm to get Pascals, divide by 1000 to get KPascals
-        return data['N'] / (10 * self.sample_thickness) * 1_000_000 / 1000
+        return data['N'] / (self.sample_area) * 1_000_000 / 1000
 
     
     def getStrain(self, data) -> pd.Series:

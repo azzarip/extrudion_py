@@ -2,7 +2,7 @@ class Stress:
     import pandas as pd
     from .files import File
     
-    def __init__(self, file: File, cut_off: bool = True, fit_window: int = 500):
+    def __init__(self, file: File, cut_off: bool = True, fit_window: int = 200):
         
         self.file = file
         self.data = self.file.data
@@ -48,7 +48,7 @@ class Stress:
     
         fit_results = pd.DataFrame()
         sizeData = len(self.data)
-
+        sizeData = len(self.data[self.data['strain'] < 0.1])
         while True:
             if right > sizeData: 
                 break
@@ -65,7 +65,7 @@ class Stress:
             left += step
             right += step
             
-        bestFit = fit_results[fit_results['error'] == fit_results['error'].min()].iloc[0]
+        bestFit = fit_results[fit_results['slope'] == fit_results['slope'].max()].iloc[0]
         return bestFit
     
     def getYield(self):
@@ -103,7 +103,7 @@ class Stress:
         
         plt.savefig('plots/'+self.file.filename + '.png')
         plt.draw()
-        plt.pause(0.5)
+        plt.pause(0.2)
         plt.close()
         
         

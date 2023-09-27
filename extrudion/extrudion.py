@@ -4,7 +4,7 @@
 
 import pandas as pd
 
-def analyzeDirectory(folder_path: str = '.', cut_off = True, sample_thickness = 10, save='') -> pd.DataFrame:
+def analyzeDirectory(folder_path: str = '.', cut_off = True, sample_area = 100) -> pd.DataFrame:
     '''
     Give a folder path as a relative or absolute path, the script will analyze all the .TAR files found in the directory and return a DataFrame containing the results.
     Leaving returns the Current Working Directory.
@@ -21,7 +21,7 @@ def analyzeDirectory(folder_path: str = '.', cut_off = True, sample_thickness = 
             os.makedirs('plots')
         
         for file in files:
-            result = analyzeFile(file, folder_path, cut_off, sample_thickness)
+            result = analyzeFile(file, folder_path, cut_off, sample_area)
             results = pd.concat([results, result])
             
         results = results.rename_axis(index='File')
@@ -34,13 +34,13 @@ def analyzeDirectory(folder_path: str = '.', cut_off = True, sample_thickness = 
     
         
     
-def analyzeFile(filename:str, folder: str, cut_off: bool = True, sample_thickness = 10):
+def analyzeFile(filename:str, folder: str, cut_off: bool = True, sample_area = 100):
     '''
     Give a filename and a folder as a relative or absolute path, the script will analyze the .TAR files found and return a DataFrame containing the results.
     '''
     from .files import File
     from .stress import Stress
-    file = File(filename, folder, sample_thickness)
+    file = File(filename, folder, sample_area)
     
     analysis = Stress(file, cut_off)
     analysis.plot()
