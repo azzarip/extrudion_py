@@ -32,7 +32,7 @@ def analyzeDirectory(folder_path: str = '.', cut_off = True, sample_area = 100) 
     except FileNotFoundError as e:
         print("File not found error:", e)
     
-def analyzeFile(file, cut_off: bool = True ):
+def analyzeFile(file, cut_off: bool = True):
     '''
     Give a filename and a folder as a relative or absolute path, the script will analyze the .TAR files found and return a DataFrame containing the results.
     '''    
