@@ -42,13 +42,20 @@ class Stress:
         import pandas as pd
         import numpy as np
         
+        window = 200
         step = 10
-        left = 0
-        right = self.fit_window
-    
+
         fit_results = pd.DataFrame()
         sizeData = len(self.data)
         sizeData = len(self.data[self.data['strain'] < 0.1])
+
+        if sizeData / window > 0.2: 
+            window = int(sizeData * 0.2)
+            step = int(sizeData*0.05+1)
+
+        left = 0
+        right = window
+
         while True:
             if right > sizeData: 
                 break
@@ -59,8 +66,9 @@ class Stress:
 
             y_exp = slope * data['strain'] + intercept
             error = (data['stress'] - y_exp)**2
+            df = pd.DataFrame({'strain':  data[['strain']].iloc[int(window / 2)].values, 'slope': slope, 'intercept': intercept, 'error': error.sum()})
 
-            fit_results = pd.concat([fit_results, pd.DataFrame({'strain':  data[['strain']].iloc[int(self.fit_window / 2)].values, 'slope': slope, 'intercept': intercept, 'error': error.sum()})],axis=0)
+            fit_results = pd.concat([fit_results, df], axis=0)
 
             left += step
             right += step

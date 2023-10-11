@@ -21,7 +21,8 @@ def analyzeDirectory(folder_path: str = '.', cut_off = True, sample_area = 100) 
             os.makedirs('plots')
         
         for file in files:
-            result = analyzeFile(file, folder_path, cut_off, sample_area)
+            dataFile = getFile(file, folder_path, sample_area)
+            result = analyzeFile(dataFile, cut_off)
             results = pd.concat([results, result])
             
         results = results.rename_axis(index='File')
@@ -30,21 +31,20 @@ def analyzeDirectory(folder_path: str = '.', cut_off = True, sample_area = 100) 
     
     except FileNotFoundError as e:
         print("File not found error:", e)
-
     
-        
-    
-def analyzeFile(filename:str, folder: str, cut_off: bool = True, sample_area = 100):
+def analyzeFile(file, cut_off: bool = True ):
     '''
     Give a filename and a folder as a relative or absolute path, the script will analyze the .TAR files found and return a DataFrame containing the results.
-    '''
-    from .files import File
+    '''    
     from .stress import Stress
-    file = File(filename, folder, sample_area)
-    
+        
     analysis = Stress(file, cut_off)
     analysis.plot()
     
     results = analysis.results
-    results.index = [filename.replace('.TRA', '')]
+    results.index = [file.filename.replace('.TRA', '')]
     return results
+
+def getFile(filename: str, folder: str, sample_area = 100):
+    from .files import File
+    return File(filename, folder, sample_area)    
