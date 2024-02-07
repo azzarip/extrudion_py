@@ -165,3 +165,4 @@ cython_debug/
 #TRA Files
 data/
 *.TRA
+plots/
