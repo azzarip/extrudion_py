@@ -10,11 +10,11 @@ class StressStrain:
 
     
     def getStress(self, sample_area):
-        return self.data['N'] / (sample_area) * 1_000_000 / 1000
+        return self.raw['N'] / (sample_area) * 1_000_000 / 1000
     
     def getStrain(self, initial_length):
         from numpy import log
-        length = self.data['mm'] + initial_length
+        length = self.raw['mm'] + initial_length
         return log(length / initial_length)
     
 

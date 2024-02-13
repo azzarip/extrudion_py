@@ -20,7 +20,7 @@ class TERFolder:
         for file in self.file_list:
             result = TERFile(self.folder_path + '/' + file).analyze(options)
             self.results = pd.concat([self.results, result])
-    
+        return self.results
     
     def getTERFiles(self):
         import os
@@ -47,6 +47,7 @@ class TERFolder:
     
 
 class TERFile:
+    
     def __init__(self, filepath: str):
         import pandas as pd
         df = pd.read_table(filepath, header = [3], encoding = 'ANSI', sep = ',')
@@ -54,11 +55,11 @@ class TERFile:
         self.data = df
          
     def analyze(self, options):
-        from .analyzers import StressStrain
-        
+        from .analyzers import StressStrain      
         ss = StressStrain(self.data, sample_area=options['sample_area'], initial_length=options['initial_length'])
-        print(ss.result)
-
+        from .fit import Fit
+        return Fit(ss).results
+    
 def replace_negative_values(x):
     if x >= 0:
         return x
