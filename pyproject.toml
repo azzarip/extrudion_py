@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "extrudion"
-version = "1.1.8"
+version = "2.0.1"
 description = "Analyzes TRA files for stress and strain"
 authors = ["Paride Azzari <paride21azzari@gmail.com>"]
 readme = "README.md"
@@ -12,6 +12,7 @@ pandas = "^2.1.1"
 numpy = "^1.26.0"
 matplotlib = "^3.8.0"
 fsspec = "^2023.9.1"
+colorama = "^0.4.4"
 
 [build-system]
 requires = ["poetry-core"]
