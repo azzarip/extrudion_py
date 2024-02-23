@@ -6,7 +6,7 @@ class TRAFolder:
         self.folder_path = folder_path
         
         self.file_list =self.getTRAFiles()
-        
+
         import pandas as pd
         self.results = pd.DataFrame()
         
@@ -15,12 +15,17 @@ class TRAFolder:
             os.makedirs(folder_path + '/plots') 
     
     def analyze(self, options = {}):
+        if not self.file_list:
+            return
+
         import pandas as pd
         
         for file in self.file_list:
             result = TRAFile(file, self.folder_path).analyze(options)
-            result['File'] = file.replace('.TRA', '')
+            result['File'] = file
             self.results = pd.concat([self.results, result])
+            
+        self.printCopyrights()
         return self.results.set_index('File')
     
     def getTRAFiles(self):
@@ -45,6 +50,22 @@ class TRAFolder:
         except FileNotFoundError:
             raise TRAFolder.FolderNotFound('Folder not found') 
         
+    def printCopyrights(self):
+        print("*********************************************")
+        print("                EXTRUDION")
+        print("*********************************************")
+        print()
+        print("by Paride Azzari (C) 2024")
+        print()
+        print("info on: github.com/azzarip/extrudion")
+        print("*********************************************")
+        print("RESULTS:")
+        print()
+        print("Analysis.csv contains the analyzed data")
+        print()
+        print("The plots folder contains all the figures")
+        print("*********************************************")
+        print()
     
 
 class TRAFile:
@@ -59,6 +80,7 @@ class TRAFile:
         else:
             self.filepath = file
             
+            
         df = pd.read_table(self.filepath, header = [3], encoding = 'ANSI', sep = ',')
         df['mm'] = df['mm'].apply(replace_negative_values)
         self.data = df
@@ -69,6 +91,7 @@ class TRAFile:
         from .plot import Plot
         
         data = StressStrain(self.data, sample_area=options['sample_area'], initial_length=options['initial_length'])
+        print(data)
         fit = Fit(data)
         if "plot" not in options or options["plot"] is not False:
             Plot(fit, data, self.filename)
