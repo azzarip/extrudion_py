@@ -48,7 +48,7 @@ class Fit:
         sizeData = len(self.data[self.data['strain'] < 0.1])
 
         if window / sizeData > 0.2:
-            window = max([int(sizeData * 0.2), 30])
+            window = max([int(sizeData * 0.2), min([30, sizeData])])
             step = 5
 
         left = 0
@@ -65,12 +65,10 @@ class Fit:
             y_exp = slope * data['strain'] + intercept
             error = (data['stress'] - y_exp)**2
             df = pd.DataFrame({'strain':  data[['strain']].iloc[int(window / 2)].values, 'slope': slope, 'intercept': intercept, 'error': error.sum()})
-
             fit_results = pd.concat([fit_results, df], axis=0)
 
             left += step
             right += step
-        
         bestFit = fit_results[fit_results['slope'] == fit_results['slope'].max()].iloc[0]
         return bestFit
     

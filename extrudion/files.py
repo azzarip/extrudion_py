@@ -21,8 +21,10 @@ class TRAFolder:
         import pandas as pd
         
         for file in self.file_list:
+            print(file)
             result = TRAFile(file, self.folder_path).analyze(options)
             result['File'] = file
+            print(result)
             self.results = pd.concat([self.results, result])
             
         self.printCopyrights()
