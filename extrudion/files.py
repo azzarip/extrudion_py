@@ -93,7 +93,7 @@ class TRAFile:
         from .plot import Plot
         
         data = StressStrain(self.data, sample_area=options['sample_area'], initial_length=options['initial_length'])
-        print(data)
+        
         fit = Fit(data)
         if "plot" not in options or options["plot"] is not False:
             Plot(fit, data, self.filename)
