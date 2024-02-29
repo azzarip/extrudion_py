@@ -23,8 +23,8 @@ class TRAFolder:
         for file in self.file_list:
             print(file)
             result = TRAFile(file, self.folder_path).analyze(options)
-            result['File'] = file
-            print(result)
+            result['File'] = self.pad_numeric_part(file)
+
             self.results = pd.concat([self.results, result])
             
         self.printCopyrights()
@@ -52,6 +52,19 @@ class TRAFolder:
         except FileNotFoundError:
             raise TRAFolder.FolderNotFound('Folder not found') 
         
+    def pad_numeric_part(filename):
+        parts = filename.split('_')
+        if len(parts) != 2:
+            return filename
+        prefix, numeric_part = parts
+        try:
+            numeric_part = int(numeric_part.split('.')[0]) 
+            padded_numeric_part = '{:04d}'.format(numeric_part)  
+            return '{}_{}.{}'.format(prefix, padded_numeric_part, filename.split('.')[-1])
+        except ValueError:
+            return filename
+        
+        
     def printCopyrights(self):
         print("*********************************************")
         print("                EXTRUDION")
@@ -69,7 +82,7 @@ class TRAFolder:
         print("*********************************************")
         print()
     
-
+    
 class TRAFile:
     
     def __init__(self, file: str, folder_path: str):
