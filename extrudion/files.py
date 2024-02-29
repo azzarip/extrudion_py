@@ -28,7 +28,7 @@ class TRAFolder:
             self.results = pd.concat([self.results, result])
             
         self.printCopyrights()
-        return self.results.set_index('File')
+        return self.results.set_index('File').sort_index()
     
     def getTRAFiles(self):
         import os
