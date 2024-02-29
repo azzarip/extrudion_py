@@ -2,8 +2,8 @@ class StressStrain:
     def __init__(self, raw, sample_area, initial_length):
         self.raw = raw
 
-        strain = self.getStrain(sample_area)
-        stress = self.getStress(initial_length)
+        strain = self.getStrain(initial_length)
+        stress = self.getStress(sample_area)
         
         import pandas as pd
         self.data = pd.DataFrame({'strain': strain, 'stress': stress})

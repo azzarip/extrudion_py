@@ -24,6 +24,9 @@ def start(folder_path: str = '.'):
             print("Invalid input. Please enter a valid number.")
  
     from .files import TRAFolder
+    
+    print('sample_area = ', sample_area)
+    print('initial_length = ', initial_length)
     results = TRAFolder(folder_path).analyze({'sample_area': float(sample_area), 'initial_length': float(initial_length)})
     results.to_csv('Analysis.csv')
 
