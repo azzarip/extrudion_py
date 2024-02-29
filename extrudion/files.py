@@ -52,7 +52,7 @@ class TRAFolder:
         except FileNotFoundError:
             raise TRAFolder.FolderNotFound('Folder not found') 
         
-    def pad_numeric_part(filename):
+    def pad_numeric_part(self, filename):
         parts = filename.split('_')
         if len(parts) != 2:
             return filename
