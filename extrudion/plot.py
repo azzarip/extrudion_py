@@ -25,9 +25,9 @@ class Plot:
         plt.legend(['Data', 'Young Modulus', 'Shift', 'Max Stress', 'Yield'])
         
         plt.savefig('plots/'+self.filename + '.png')
+        plt.close()
         # plt.draw()
         # plt.pause(0.2)
-        # plt.close()
         
     def plotBestFit(self):
         import matplotlib.pyplot as plt
