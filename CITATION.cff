@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Azzari
+    given-names: Paride
+    orcid: https://orcid.org/0000-0001-5400-1576
+title: "Extrudion: Python Package for Tensile Analysis"
+version: 2.0.4 
+date-released: 2024-03-05
