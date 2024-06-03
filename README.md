@@ -42,7 +42,7 @@ The `TRAFolder` class for analyzing a single file:
 
 ## Additional Information
 
-More information on the usage of the package, the reported results and the physics behind the computation can be found in the [Doc fIle](Docs.pdf) inside the repository.
+More information on the usage of the package, the reported results and the physics behind the computation can be found in the [Doc File](Docs.pdf) inside the repository.
 
 ## Physics Fundamentals
 
