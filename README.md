@@ -44,7 +44,7 @@ The `TRAFolder` class for analyzing a single file:
 
 More information on the usage of the package, the reported results and the physics behind the computation can be found in the [Doc fIle](Docs.pdf) inside the repository.
 
-# Physics Fundamentals
+## Physics Fundamentals
 
 `Stress` = Force['N'] / `sample_thickness` / 10 * 10^3 
 
@@ -58,7 +58,7 @@ returns gives the `stress` in `kPa`
 
 `Yield Stress and Strain` are the point of intersection for the Young modulus line shifted by 0.02 in the Strain and the data.
 
-# Results
+## Results
 
 The numerical analysis output is stored in a `csv` file. 
 
@@ -72,7 +72,7 @@ The intersection coordinates between the shifted line and the stress-strain curv
 |-----------|------------------|------------|----------------------|------------------|--------------------|--------------|
 | File.TRA  | 61.73            | 0.14       | 692                  | 0.80             | 50.29              | 0.092        |
 
-## Plot Example
+### Plot Example
 The output of the analysis is as shown in the figure Below. 
 
 The stress-strain curve, depicted in blue, features a blue dot denoting the maximum stress. A fitted line representing Young's modulus is depicted in orange dashed, alongside a 2\% shifted line displayed in dotted green. 
