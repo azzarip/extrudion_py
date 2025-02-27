@@ -96,7 +96,7 @@ class TRAFile:
             self.filepath = file
             
             
-        df = pd.read_table(self.filepath, header = [3], encoding = 'ANSI', sep = ',')
+        df = pd.read_table(self.filepath, header = [3], encoding = 'Windows-1252', sep = ',')
         df['mm'] = df['mm'].apply(replace_negative_values)
         self.data = df
          
