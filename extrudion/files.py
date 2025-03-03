@@ -95,7 +95,8 @@ class TRAFile:
         else:
             self.filepath = file
 
-        df = pd.read_table(self.filepath, header=[3], encoding='ANSI', sep=',')
+        df = pd.read_table(self.filepath, header=[
+                           3], encoding='Windows-1252', sep=',')
         df['mm'] = df['mm'].apply(replace_negative_values)
         self.data = df
 
@@ -122,4 +123,10 @@ def replace_negative_values(x):
     if abs(x) < 0.01:
         return 0
     else:
-        raise ValueError("Negative values in column 'mm'")
+
+
+<< << << < HEAD
+raise ValueError("Negative values in column 'mm'")
+== == == =
+raise ValueError("Negative values in column 'mm'")
+>>>>>> > 8c1643b1469747eec8636596ff5bf458efe2392c
