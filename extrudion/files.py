@@ -123,10 +123,4 @@ def replace_negative_values(x):
     if abs(x) < 0.01:
         return 0
     else:
-
-
-<< << << < HEAD
-raise ValueError("Negative values in column 'mm'")
-== == == =
-raise ValueError("Negative values in column 'mm'")
->>>>>> > 8c1643b1469747eec8636596ff5bf458efe2392c
+        raise ValueError("Negative values in column 'mm'")
