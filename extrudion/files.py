@@ -19,13 +19,31 @@ class TRAFolder:
             return
 
         import pandas as pd
+        from colorama import init, Fore
 
+        print(Fore.RED + "---------------------------")
+        print(Fore.RED + "--------- WARNING ---------")
+        print(Fore.RED + "---------------------------")
         for file in self.file_list:
             print(file)
-            result = TRAFile(file, self.folder_path).analyze(options)
-            result['File'] = self.pad_numeric_part(file)
+            try:
 
-            self.results = pd.concat([self.results, result])
+                result = TRAFile(file, self.folder_path).analyze(options)
+                result['File'] = self.pad_numeric_part(file)
+                self.results = pd.concat([self.results, result])
+
+            except LinAlgError as e:
+                init()
+                print(Fore.RED + "*** ERROR ***" + Fore.WHITE)
+                print(f"Failed to analyze '{file}': {e}. Skipping this file.")
+                print(Fore.RED + "---------------" + Fore.WHITE)
+
+            except Exception as e:
+                init()
+                print(Fore.RED + "*** ERROR ***"+Fore.WHITE)
+                print(
+                    f"Unexpected error with '{file}': {e}. Skipping this file.")
+                print(Fore.RED + "---------------" + Fore.WHITE)
 
         self.printCopyrights()
         return self.results.set_index('File').sort_index()
